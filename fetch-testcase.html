@@ -27,8 +27,11 @@
         mode: 'cors'
       }).then((res) => {
       console.log(res.headers);
-      document.write(
-        `Fetch completed.<br/>Fetch delivered headers: <br/><pre>${JSON.stringify(res.headers)}</pre><br/>`);
+      document.write(`Fetch completed.<br/>Fetch delivered headers: <br/><pre>`);
+      for (var pair of res.headers.entries()) {
+        document.write(`${pair[0]}: ${pair[1]} <br/>`);
+      }
+      document.write(`</pre><br/>`);
       res.json().then((json) => {
         console.log(json);
         var jr = json[0];

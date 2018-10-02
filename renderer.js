@@ -8,8 +8,12 @@ fetch('https://server.test-cors.org/server?id=1217060&enable=true&status=200&cre
 	method: 'POST',
 	mode: 'cors'
 }).then((res) => {
-	console.log(res.headers);
-	document.write(`Fetch completed.<br/>Fetch delivered headers: <br/><pre>${JSON.stringify(res.headers)}</pre><br/>`);
+	document.write(`External Testcase: <a href='https://htmlpreview.github.io/?https://github.com/secadm/electron-bugs/blob/fetch-showcase/fetch-testcase.html'>fetch-testcase</a><br/>`);
+	document.write(`Fetch completed.<br/>Fetch delivered headers: <br/><pre>`);
+	for (var pair of res.headers.entries()) {
+		document.write(`${pair[0]}: ${pair[1]} <br/>`);
+	}
+	document.write(`</pre><br/>`);
 	res.json().then((json) => {
 		console.log(json);
 		var jr = json[0];
