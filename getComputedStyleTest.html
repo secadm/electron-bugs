@@ -1,0 +1,28 @@
+<html>
+
+<head>
+	<title>getComputedStyle testcase</title>
+</head>
+
+<body>
+    <div id="div1" style="border: 1px; left: 10px; top: 20px; background-color: red; height: 70.5px; width: 80.3px;">div1</div>
+    <script>
+    </script>
+
+    <div id="div2" style="border: 1px; left: 10px; margin-top: 20px; background-color: green;">div2</div>
+    <pre><script>
+        let div1 = document.getElementById('div1');
+        let div1cs = window.getComputedStyle(document.getElementById('div1'));
+        document.write(`div1 applied style:\n Height: ${div1.style.height}\n Width: ${div1.style.width}\n\n`);
+        document.write(`div1 computed style:\n Height: ${div1cs['height']} ${div1cs.getPropertyValue('height')}\n Width: ${div1cs['width']}\n\n`);
+	// trying to apply div1 computed widht/height to div2
+	let div2 = document.getElementById('div2');
+	div2.style.height = div1cs.getPropertyValue('height');
+	div2.style.width = div1cs.getPropertyValue('width');
+        let cs2 = window.getComputedStyle(div2);
+        document.write(`div2 computed style: <br/> Height: ${cs2['height']} <br/> Width: ${cs2['width']}`);
+    </script>
+    </pre>
+</body>
+
+</html>
