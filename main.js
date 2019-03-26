@@ -5,6 +5,30 @@ const {app, BrowserWindow} = require('electron')
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
+function createModalWindow1 () {
+  const win1 = new BrowserWindow({width: 600, height: 400, parent: mainWindow, modal: true, show: false})
+
+  win1.once('ready-to-show', () => {
+    win1.show()
+    setTimeout(() => win1.destroy(), 500)
+  })
+
+  win1.once('closed', () => createModalWindow2())
+
+  win1.loadFile('index.html')
+}
+
+function createModalWindow2 () {
+  const win2 = new BrowserWindow({width: 300, height: 200, parent: mainWindow, modal: true, show: false})
+
+  win2.once('ready-to-show', () => {
+    win2.show()
+    setTimeout(() => win2.close(), 500)
+  })
+
+  win2.loadFile('index.html')
+}
+
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -20,6 +44,7 @@ function createWindow () {
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
+  createModalWindow1()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
